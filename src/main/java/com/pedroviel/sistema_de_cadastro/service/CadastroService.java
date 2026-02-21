@@ -47,13 +47,14 @@ public class CadastroService {
 
     public Cadastro alterarCadastroAluno(Cadastro cadastro, String nomeAluno, String cursoAluno) {
 
-        Cadastro cadastros = cadastroRepository.findByNomeAlunoAndCursoAluno(nomeAluno, cursoAluno);
+        Cadastro cadastros = cadastroRepository.findByNomeAluno(nomeAluno);
 
         if (Objects.isNull(cadastros)) {
             throw new RuntimeException("Aluno não encontrado!");
         }
 
         cadastro.setMatriculaAluno(cadastros.getMatriculaAluno());
+        cadastro.setCursoAluno(cursoAluno);
         return cadastroRepository.save(cadastro);
     }
 

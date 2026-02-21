@@ -8,5 +8,6 @@ import java.util.UUID;
 
 public interface CadastroRepository extends JpaRepository<Cadastro, UUID> {
     Cadastro findByNomeAlunoAndCursoAluno(String nomeAluno, String cursoAluno);
+    Cadastro findByNomeAluno(String nomeAluno);
     List<Cadastro> findByCursoAluno(String cursoAluno);
 }
