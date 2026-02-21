@@ -42,7 +42,7 @@ Abaixo estão as rotas disponíveis no `CadastroController`:
 
 * `POST /cadastros` - Cadastra um novo aluno.
 * `GET /cadastros?cursoAluno={curso}` - Lista todos os alunos matriculados em um curso específico.
-* `PUT /cadastros?nomeAluno={nome}&cursoAluno={curso}` - Altera os dados de um aluno existente buscando por nome e curso.
+* `PUT /cadastros?nomeAluno={nome}&cursoAluno={curso}` - Altera o curso de um aluno existente buscando por seu nome.
 * `DELETE /cadastros?matriculaAluno={uuid}` - Remove um aluno do sistema através de sua matrícula (UUID).
 
 *(Exemplo de payload (JSON) para o POST e PUT)*:
