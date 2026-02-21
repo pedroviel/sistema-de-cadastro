@@ -33,7 +33,7 @@ public class CadastroController {
     }
 
     @PutMapping
-    public ResponseEntity<Cadastro> alterarCadastroAluno(@RequestBody Cadastro cadastro, @RequestParam String nomeAluno, @RequestParam String cursoAluno) {
-        return ResponseEntity.accepted().body(cadastroService.alterarCadastroAluno(cadastro, nomeAluno, cursoAluno));
+    public ResponseEntity<Cadastro> alterarCadastroAluno(@RequestParam String nomeAluno, @RequestParam String cursoAluno) {
+        return ResponseEntity.accepted().body(cadastroService.alterarCadastroAluno(nomeAluno, cursoAluno));
     }
 }

@@ -31,7 +31,10 @@ public class CadastroService {
             throw new RuntimeException("Matrícula inválida!");
         }
 
+        String nomeAluno = cadastroRepository.findById(matriculaAluno).get().getNomeAluno();
+
         cadastroRepository.deleteById(matriculaAluno);
+        System.out.println(nomeAluno + " deletado com sucesso!");
     }
 
     public List<Cadastro> listarAlunosPorCurso(String cursoAluno) {
@@ -45,17 +48,17 @@ public class CadastroService {
         return cadastros;
     }
 
-    public Cadastro alterarCadastroAluno(Cadastro cadastro, String nomeAluno, String cursoAluno) {
+    public Cadastro alterarCadastroAluno(String nomeAluno, String cursoAluno) {
 
-        Cadastro cadastros = cadastroRepository.findByNomeAluno(nomeAluno);
+        Cadastro alunoCadastrado = cadastroRepository.findByNomeAluno(nomeAluno);
 
-        if (Objects.isNull(cadastros)) {
+        if (Objects.isNull(alunoCadastrado)) {
             throw new RuntimeException("Aluno não encontrado!");
         }
 
-        cadastro.setMatriculaAluno(cadastros.getMatriculaAluno());
-        cadastro.setCursoAluno(cursoAluno);
-        return cadastroRepository.save(cadastro);
+        alunoCadastrado.setCursoAluno(cursoAluno);
+
+        return cadastroRepository.save(alunoCadastrado);
     }
 
 
