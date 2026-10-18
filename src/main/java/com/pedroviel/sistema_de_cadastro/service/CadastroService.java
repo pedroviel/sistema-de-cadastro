@@ -1,7 +1,8 @@
 package com.pedroviel.sistema_de_cadastro.service;
 
-import com.pedroviel.sistema_de_cadastro.infrastructure.entity.Cadastro;
-import com.pedroviel.sistema_de_cadastro.infrastructure.repository.CadastroRepository;
+import com.pedroviel.sistema_de_cadastro.entity.Cadastro;
+import com.pedroviel.sistema_de_cadastro.repository.CadastroRepository;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +16,19 @@ public class CadastroService {
 
     private final CadastroRepository cadastroRepository;
 
+    @NonNull
     public Cadastro cadastrarAluno(Cadastro cadastro) {
 
-        Cadastro cadastros = cadastroRepository.findByNomeAlunoAndCursoAluno(cadastro.getNomeAluno(), cadastro.getCursoAluno());
+        String nomeAluno = cadastro.getNomeAluno();
+        String cursoAluno = cadastro.getCursoAluno();
+
+        Cadastro cadastros = cadastroRepository.findByNomeAlunoAndCursoAluno(nomeAluno, cursoAluno);
 
         if (Objects.nonNull(cadastros)) {
             throw new RuntimeException("Aluno já matriculado no curso!");
         }
+
+        System.out.println(nomeAluno + " cadastrado com sucesso!");
         return cadastroRepository.save(cadastro);
     }
 
@@ -61,5 +68,7 @@ public class CadastroService {
         return cadastroRepository.save(alunoCadastrado);
     }
 
-
+    public Cadastro buscarAlunoPorMatricula(UUID matriculaAluno) {
+        return cadastroRepository.findByMatriculaAluno(matriculaAluno);
+    }
 }

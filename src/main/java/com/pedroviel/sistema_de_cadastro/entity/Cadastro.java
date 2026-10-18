@@ -1,4 +1,4 @@
-package com.pedroviel.sistema_de_cadastro.infrastructure.entity;
+package com.pedroviel.sistema_de_cadastro.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,8 +21,5 @@ public class Cadastro {
     @GeneratedValue( strategy = GenerationType.UUID)
     private UUID matriculaAluno;
     private String nomeAluno;
-    private String emailAluno;
     private String cursoAluno;
-    private int idadeAluno;
-    private LocalDateTime dataDeCadastroAluno = LocalDateTime.now();
 }
