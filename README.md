@@ -1,57 +1,38 @@
-# Sistema de Cadastro de Alunos
+# Sistema de cadastro
 
-Uma API REST simples para o gerenciamento de matrículas de alunos. 
+API Rest desenvolvida por meio de um CRUD simples, onde é possível criar alunos, indicando o seu curso, e cada um tem sua matricula própria gerada como ID no ato de criação.
 
-Este sistema permite cadastrar, listar, atualizar e remover alunos de diferentes cursos, garantindo regras de negócio básicas (como evitar duplicidade de matrículas no mesmo curso e validar se um aluno existe antes de deletá-lo).
+## Tecnologias utilizadas
 
-## Tecnologias Utilizadas
+- Java
+- Spring / Spring Boot
+- H2 Database
+- Lombok
+- Maven
 
-O projeto foi desenvolvido utilizando o ecossistema Spring:
+## Como executar
 
-* **Java**
-* **Spring Boot 4**
-* **Spring Data JPA**
-* **H2 Database**
-* **Lombok**
-* **Maven**
+Como é utilizado o H2 Database, o projeto não necessita de um banco de dados externo.
 
-## Como executar o projeto
+1 - Clonar esse repositório \
+2 - Abra na sua IDE \
+3 - Atualize as dependências Maven \
+4 - Execute SistemaDeCadastroApplication.java
 
-Como o projeto utiliza o banco de dados H2 em memória, não é necessário instalar nenhum banco de dados externo. Tudo já está configurado para rodar "out of the box".
-
-1. Clone este repositório:
-   ```bash
-   git clone [https://github.com/pedroviel/sistema-de-cadastro.git](https://github.com/pedroviel/sistema-de-cadastro.git)
-   ```
-2. Abra o projeto na sua IDE de preferência (IntelliJ, Eclipse, VS Code).
-3. Atualize as dependências do Maven.
-4. Execute a classe principal `SistemaDeCadastroApplication.java`.
-
-A API estará rodando localmente em `http://localhost:8080`.
-
-### Acessando o Banco de Dados (H2 Console)
-Você pode visualizar as tabelas e os dados salvos em tempo real acessando o painel do H2 pelo navegador:
-
-* **URL:** `http://localhost:8080/h2-console`
-* **JDBC URL:** `jdbc:h2:mem:cadastros-db`
-* **User Name:** `sa`
-* **Password:** *(deixe em branco)*
+Ao executar a API estará rodando localmente em localhost:8080.
 
 ## Endpoints da API
-Abaixo estão as rotas disponíveis no `CadastroController`:
 
-* `POST /cadastros` - Cadastra um novo aluno.
-* `GET /cadastros?cursoAluno={curso}` - Lista todos os alunos matriculados em um curso específico.
-* `PUT /cadastros?nomeAluno={nome}&cursoAluno={curso}` - Altera o curso de um aluno existente buscando por seu nome.
-* `DELETE /cadastros?matriculaAluno={uuid}` - Remove um aluno do sistema através de sua matrícula (UUID).
+Você poderá testar todas a s requisições em ferramentas como Postman.
 
-*(Exemplo de payload (JSON) para o POST e PUT)*:
+* `POST /cadastros` Cadastrar um novo aluno.
+* `GET /cadastros?cursoAluno={curso}` Listar alunos pelo curso.
+* `GET /cadastros/{uuid}` Buscar aluno pela sua matrícula.
+* `PUT /cadastros?nomeAluno={nome}&cursoAluno={curso}` Alterar o cadastro do aluno.
+* `DELETE /cadastros?matriculaAluno={uuid}`  Deletar um aluno com sua matrícula como parâmetro.
 
-```json
-{
-  "nomeAluno": "Fulano",
-  "emailAluno": "fulano@email.com",
-  "cursoAluno": "Engenharia da Computação",
-  "idadeAluno": 30
-}
-```
+## Exemplo de payload para o POST
+
+````
+{"nomeAluno": "Pedro", "cursoAluno": "Engenharia"}
+````
