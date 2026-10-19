@@ -11,4 +11,5 @@ public interface CadastroRepository extends JpaRepository<Cadastro, UUID> {
     Cadastro findByNomeAluno(String nomeAluno);
     Cadastro findByMatriculaAluno(UUID matriculaAluno);
     List<Cadastro> findByCursoAluno(String cursoAluno);
+    boolean existsByCursoAluno(String cursoAluno);
 }

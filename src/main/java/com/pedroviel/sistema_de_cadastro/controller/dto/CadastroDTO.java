@@ -1,14 +1,15 @@
 package com.pedroviel.sistema_de_cadastro.controller.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.UUID;
+public record CadastroDTO (
 
-@Getter
-@Setter
-public class CadastroDTO {
-    private UUID matriculaAluno;
-    private String nomeAluno;
-    private String cursoAluno;
-}
+        UUID matriculaAluno,
+
+        @NotBlank
+        String nomeAluno,
+
+        @NotBlank
+        String cursoAluno
+){}

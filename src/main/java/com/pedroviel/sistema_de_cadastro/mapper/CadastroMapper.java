@@ -15,13 +15,7 @@ public class CadastroMapper {
             return null;
         }
 
-        CadastroDTO dto = new CadastroDTO();
-
-        dto.setMatriculaAluno(cadastro.getMatriculaAluno());
-        dto.setNomeAluno(cadastro.getNomeAluno());
-        dto.setCursoAluno(cadastro.getCursoAluno());
-
-        return dto;
+        return new CadastroDTO(cadastro.getMatriculaAluno(), cadastro.getNomeAluno(), cadastro.getCursoAluno());
     }
 
     public List<CadastroDTO> toDTOList(List<Cadastro> cadastros) {
@@ -39,12 +33,6 @@ public class CadastroMapper {
             return null;
         }
 
-        Cadastro cadastro = new Cadastro();
-
-        cadastro.setMatriculaAluno(dto.getMatriculaAluno());
-        cadastro.setNomeAluno(dto.getNomeAluno());
-        cadastro.setCursoAluno(dto.getCursoAluno());
-
-        return cadastro;
+        return new Cadastro(dto.matriculaAluno(), dto.nomeAluno(), dto.cursoAluno());
     }
 }

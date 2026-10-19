@@ -4,6 +4,7 @@ import com.pedroviel.sistema_de_cadastro.controller.dto.CadastroDTO;
 import com.pedroviel.sistema_de_cadastro.entity.Cadastro;
 import com.pedroviel.sistema_de_cadastro.mapper.CadastroMapper;
 import com.pedroviel.sistema_de_cadastro.service.CadastroService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class CadastroController {
     private final CadastroMapper cadastroMapper;
 
     @PostMapping
-    public ResponseEntity<CadastroDTO> cadastrarAluno(@RequestBody CadastroDTO cadastroDTO) {
+    public ResponseEntity<CadastroDTO> cadastrarAluno(@RequestBody @Valid CadastroDTO cadastroDTO) {
 
         Cadastro cadastro = cadastroMapper.toEntity(cadastroDTO);
         Cadastro cadastroSalvo = cadastroService.cadastrarAluno(cadastro);

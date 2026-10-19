@@ -1,6 +1,7 @@
 package com.pedroviel.sistema_de_cadastro.service;
 
 import com.pedroviel.sistema_de_cadastro.entity.Cadastro;
+import com.pedroviel.sistema_de_cadastro.exception.*;
 import com.pedroviel.sistema_de_cadastro.repository.CadastroRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class CadastroService {
         Cadastro cadastros = cadastroRepository.findByNomeAlunoAndCursoAluno(nomeAluno, cursoAluno);
 
         if (Objects.nonNull(cadastros)) {
-            throw new RuntimeException("Aluno já matriculado no curso!");
+            throw new StudentAlreadyEnrolledException();
         }
 
         System.out.println(nomeAluno + " cadastrado com sucesso!");
@@ -35,7 +36,7 @@ public class CadastroService {
     public void deletarAluno(UUID matriculaAluno) {
 
         if(!cadastroRepository.existsById(matriculaAluno)){
-            throw new RuntimeException("Matrícula inválida!");
+            throw new InvalidIDException();
         }
 
         String nomeAluno = cadastroRepository.findById(matriculaAluno).get().getNomeAluno();
@@ -46,10 +47,14 @@ public class CadastroService {
 
     public List<Cadastro> listarAlunosPorCurso(String cursoAluno) {
 
+        if(!cadastroRepository.existsByCursoAluno(cursoAluno)){
+            throw new InvalidMajorException();
+        }
+
         List<Cadastro> cadastros = cadastroRepository.findByCursoAluno(cursoAluno);
 
         if(cadastros.isEmpty()){
-            throw new RuntimeException("Não há alunos cadastrados no curso!");
+            throw new StudentNotFoundInCourse();
         }
 
         return cadastros;
@@ -60,7 +65,7 @@ public class CadastroService {
         Cadastro alunoCadastrado = cadastroRepository.findByNomeAluno(nomeAluno);
 
         if (Objects.isNull(alunoCadastrado)) {
-            throw new RuntimeException("Aluno não encontrado!");
+            throw new StudentNotFoundException();
         }
 
         alunoCadastrado.setCursoAluno(cursoAluno);
@@ -69,6 +74,10 @@ public class CadastroService {
     }
 
     public Cadastro buscarAlunoPorMatricula(UUID matriculaAluno) {
+        if(!cadastroRepository.existsById(matriculaAluno)){
+            throw new StudentNotFoundException();
+        }
+
         return cadastroRepository.findByMatriculaAluno(matriculaAluno);
     }
 }
