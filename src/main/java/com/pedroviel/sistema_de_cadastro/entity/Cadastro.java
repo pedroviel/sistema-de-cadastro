@@ -1,16 +1,16 @@
 package com.pedroviel.sistema_de_cadastro.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
+@Component
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "cadastro")
