@@ -19,7 +19,7 @@ public class CadastroRepositoryTests {
     private CadastroRepository cadastroRepository;
 
     @Test
-    public void CadastroRepository_findByNomeAlunoAndCursoAluno_pesquisarPeloAlunoECurso() {
+    public void findByNomeAlunoAndCursoAluno_DeveRetornarONomeECursoCadastrados() {
 
         //Arrange
         Cadastro cadastro = Cadastro.builder()
@@ -37,7 +37,7 @@ public class CadastroRepositoryTests {
     }
 
     @Test
-    public void CadastroRepository_findByNomeAluno_pesquisarAlunoPeloNome() {
+    public void findByNomeAluno_DeveRetornarOObjetoDoAlunoPesquisadoPeloNome() {
 
         //Arrange
         Cadastro cadastro = Cadastro.builder()
@@ -55,7 +55,7 @@ public class CadastroRepositoryTests {
     }
 
     @Test
-    public void CadastroRepository_findByMatriculaAluno_pesquisarAlunoPelaMatricula() {
+    public void findByMatriculaAluno_DeveRetornarOObjetoDoAlunoPesquisadoPelaMatricula() {
 
         //Arrange
         Cadastro cadastro = Cadastro.builder()
@@ -73,26 +73,29 @@ public class CadastroRepositoryTests {
     }
 
     @Test
-    public void CadastroRepository_findByCursoAluno_alunosNoCurso() {
+    public void findByCursoAluno_DeveExibirApenasAlunosDoCursoEspecificado() {
 
         //Arrange
         Cadastro cadastro = Cadastro.builder()
                 .nomeAluno("Pedro")
                 .cursoAluno("Engenharia da Computação").build();
+        Cadastro cadastro2 = Cadastro.builder()
+                .nomeAluno("Viel")
+                .cursoAluno("Administração").build();
 
         //Act
         cadastroRepository.save(cadastro);
+        cadastroRepository.save(cadastro2);
         List<Cadastro> alunosNoCurso = cadastroRepository.findByCursoAluno(cadastro.getCursoAluno());
 
         //Assert
         Assertions.assertThat(alunosNoCurso).isNotNull();
         Assertions.assertThat(alunosNoCurso.get(0).getNomeAluno()).isEqualTo("Pedro");
         Assertions.assertThat(alunosNoCurso.get(0).getCursoAluno()).isEqualTo("Engenharia da Computação");
-
     }
 
     @Test
-    public void CadastroRepository_existsByCursoAluno_cursoExiste() {
+    public void existsByCursoAluno_DeveRetornarTrue() {
 
         //Arrange
         Cadastro cadastro = Cadastro.builder()
